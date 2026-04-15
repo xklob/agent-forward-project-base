@@ -8,11 +8,13 @@ When writing complex features or significant refactors, use an ExecPlan (as desc
 
 Treat the root documentation files as durable project control documents:
 - `README.md` explains what the project is, how to run it, and how to validate changes.
+- `PRODUCT.md` captures the current user-visible product state, workflows, capability boundaries, and important limitations.
+- `ROADMAP.md` captures the intended product direction, planned capabilities, strategic priorities, and explicit non-priorities.
 - `PLANS.md` defines how ExecPlans must be written and maintained.
 - `DESIGN.md` captures the semantic design system in descriptive language, backed by concrete values where needed.
 - `ARCHITECTURE.md` captures the high-level codemap, architectural boundaries, and invariants.
 
-When a change materially affects product design language, update `DESIGN.md` in the same change. When a change materially affects structure, ownership, or system boundaries, update `ARCHITECTURE.md` in the same change.
+When a change materially affects current user-visible capabilities, workflows, scope boundaries, or important product limitations, update `PRODUCT.md` in the same change. When a change materially affects product vision, intended audience, strategic priorities, planned capabilities, sequencing assumptions, or explicit non-priorities, update `ROADMAP.md` in the same change. When a change materially affects product design language, update `DESIGN.md` in the same change. When a change materially affects structure, ownership, or system boundaries, update `ARCHITECTURE.md` in the same change.
 
 If you introduce a new root-level `ALLCAPS.md` file, treat it as a new control document by default. In the same change:
 - Define the file's purpose and scope inside the file itself.
@@ -42,9 +44,11 @@ If you introduce a language toolchain, add its canonical commands to this sectio
 Use consistent, readable defaults:
 - Indent with 2 spaces for YAML/JSON/Markdown and 4 spaces for code unless the language ecosystem strongly prefers otherwise.
 - Use descriptive file and module names such as `src/session_store.py` or `tests/test_session_store.py`.
-- Keep functions small and names explicit; prefer `snake_case` for Python-style code and `kebab-case` for Markdown filenames outside conventional root docs such as `README.md`, `AGENTS.md`, `PLANS.md`, `DESIGN.md`, and `ARCHITECTURE.md`.
+- Keep functions small and names explicit; prefer `snake_case` for Python-style code and `kebab-case` for Markdown filenames outside conventional root docs such as `README.md`, `AGENTS.md`, `PLANS.md`, `PRODUCT.md`, `ROADMAP.md`, `DESIGN.md`, and `ARCHITECTURE.md`.
 
 Documentation should also follow clear naming and ownership rules:
+- Keep `PRODUCT.md` focused on current product truth and capability scope, not implementation notes or temporary project status.
+- Keep `ROADMAP.md` focused on durable product direction and priorities, not ticket backlogs or sprint-by-sprint planning.
 - Keep `DESIGN.md` focused on stable visual language, not per-screen implementation notes.
 - Keep `ARCHITECTURE.md` focused on stable structure and boundaries, not low-level algorithm details.
 - Keep `README.md` focused on onboarding, commands, and user-facing project context.
