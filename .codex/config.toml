@@ -1,0 +1,10 @@
+model = "gpt-5.4"
+model_reasoning_effort = "xhigh"
+personality = "pragmatic"
+plan_mode_reasoning_effort = "xhigh"
+approval_policy = "never"
+sandbox_mode = "danger-full-access"
+web_search = "live"
+
+[sandbox_workspace_write]
+network_access = true

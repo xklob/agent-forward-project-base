@@ -1,0 +1,68 @@
+# Repository Guidelines
+
+## ExecPlans
+
+When writing complex features or significant refactors, use an ExecPlan (as described in `PLANS.md`) from design to implementation.
+
+## Core Documents
+
+Treat the root documentation files as durable project control documents:
+- `README.md` explains what the project is, how to run it, and how to validate changes.
+- `PLANS.md` defines how ExecPlans must be written and maintained.
+- `DESIGN.md` captures the semantic design system in descriptive language, backed by concrete values where needed.
+- `ARCHITECTURE.md` captures the high-level codemap, architectural boundaries, and invariants.
+
+When a change materially affects product design language, update `DESIGN.md` in the same change. When a change materially affects structure, ownership, or system boundaries, update `ARCHITECTURE.md` in the same change.
+
+If you introduce a new root-level `ALLCAPS.md` file, treat it as a new control document by default. In the same change:
+- Define the file's purpose and scope inside the file itself.
+- Update this `Core Documents` section so future contributors know the file exists and when it matters.
+- Update `PLANS.md` if ExecPlans are expected to read, update, or validate that file.
+- State what kinds of code or product changes must keep the new file in sync.
+
+## Project Structure & Module Organization
+This repository is intentionally minimal at the moment. Keep runtime code in `src/`, mirror tests in `tests/`, keep static assets in `assets/`, and leave long-lived documentation in the repository root.
+
+When adding application code, keep the layout simple and predictable:
+- Put runtime code in a top-level `src/` directory.
+- Mirror tests under `tests/`.
+- Keep static assets in `assets/` if they are needed later.
+- Leave repository-level documentation in the root.
+
+## Build, Test, and Development Commands
+There is no checked-in build or test toolchain yet. Until one is added, use lightweight repo checks:
+
+- `git status` shows pending changes before commit or review.
+- `rg --files` lists the current file set quickly.
+- `git log --oneline` shows the existing commit style.
+
+If you introduce a language toolchain, add its canonical commands to this section in the same change. Prefer a single documented entry point such as `make test`, `npm test`, or `pytest`.
+
+## Coding Style & Naming Conventions
+Use consistent, readable defaults:
+- Indent with 2 spaces for YAML/JSON/Markdown and 4 spaces for code unless the language ecosystem strongly prefers otherwise.
+- Use descriptive file and module names such as `src/session_store.py` or `tests/test_session_store.py`.
+- Keep functions small and names explicit; prefer `snake_case` for Python-style code and `kebab-case` for Markdown filenames outside conventional root docs such as `README.md`, `AGENTS.md`, `PLANS.md`, `DESIGN.md`, and `ARCHITECTURE.md`.
+
+Documentation should also follow clear naming and ownership rules:
+- Keep `DESIGN.md` focused on stable visual language, not per-screen implementation notes.
+- Keep `ARCHITECTURE.md` focused on stable structure and boundaries, not low-level algorithm details.
+- Keep `README.md` focused on onboarding, commands, and user-facing project context.
+- Reserve new root-level `ALLCAPS.md` files for durable guidance or control documents, not scratch notes or one-off design dumps.
+
+If you add formatters or linters, run them before opening a PR and document them here.
+
+## Testing Guidelines
+New behavior should ship with tests. Mirror the source layout inside `tests/` and name tests after the unit under test, for example `tests/test_cli.py`.
+
+Because no framework is configured yet, contributors should add a test runner together with any non-trivial code and document how to execute it locally.
+
+## Commit & Pull Request Guidelines
+The current history starts with a short imperative commit message: `Initial commit`. Follow that pattern: concise subject line, imperative mood, no trailing period.
+
+Pull requests should explain:
+- What changed
+- Why it changed
+- How it was validated
+
+Include linked issues when applicable. Add screenshots only when the change affects rendered output or documentation presentation.
